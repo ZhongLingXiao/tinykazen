@@ -1,7 +1,8 @@
 #pragma once
 
-#include <nori/common.h>
-#include <nori/ray.h>
+#include <kazen/common.h>
+#include <kazen/ray.h>
+#include <enoki/transform.h>
 
 NAMESPACE_BEGIN(kazen)
 
@@ -25,8 +26,8 @@ template <typename Point_> struct Transform {
     // =============================================================
     // Fields
     // =============================================================
-    Matrix matrix           = identity<Matrix>();
-    Matrix inverseTranspose = identity<Matrix>();
+    Matrix matrix           = enoki::detail::identity<Matrix>();
+    Matrix inverseTranspose = enoki::detail::identity<Matrix>();
 
     // =============================================================
     // Constructors, methods, etc.
@@ -35,7 +36,7 @@ template <typename Point_> struct Transform {
     /// Initialize the transformation from the given matrix (and compute its inverse transpose)
     Transform(const Matrix &value)
         : matrix(value),
-          inverseTranspose(enoki::inverseTranspose(value)) { }
+          inverseTranspose(enoki::inverse_transpose(value)) { }
 
     /// Concatenate transformations
     KAZEN_INLINE Transform operator*(const Transform &other) const {
@@ -124,21 +125,22 @@ template <typename Point_> struct Transform {
         return head<Size - 1>(result); // no-op
     }
 
-    /// Transform a ray (for perspective transformations)
-    template <typename T, typename Spectrum, typename Expr = expr_t<Float, T>,
-              typename Result = Ray<Point<Expr, Size - 1>, Spectrum>>
-    KAZEN_INLINE Result operator*(const Ray<Point<T, Size - 1>, Spectrum> &ray) const {
-        return Result(operator*(ray.o), operator*(ray.d), ray.mint,
-                      ray.maxt, ray.time, ray.wavelengths);
-    }
+    // // TODO
+    // /// Transform a ray (for perspective transformations)
+    // template <typename T, typename Spectrum, typename Expr = expr_t<Float, T>,
+    //           typename Result = Ray<Point<Expr, Size - 1>, Spectrum>>
+    // KAZEN_INLINE Result operator*(const Ray<Point<T, Size - 1>, Spectrum> &ray) const {
+    //     return Result(operator*(ray.o), operator*(ray.d), ray.mint,
+    //                   ray.maxt, ray.time, ray.wavelengths);
+    // }
 
-    /// Transform a ray (for affine/non-perspective transformations)
-    template <typename T, typename Spectrum, typename Expr = expr_t<Float, T>,
-              typename Result = Ray<Point<Expr, Size - 1>, Spectrum>>
-    KAZEN_INLINE Result transform_affine(const Ray<Point<T, Size - 1>, Spectrum> &ray) const {
-        return Result(transform_affine(ray.o), transform_affine(ray.d),
-                      ray.mint, ray.maxt, ray.time, ray.wavelengths);
-    }
+    // /// Transform a ray (for affine/non-perspective transformations)
+    // template <typename T, typename Spectrum, typename Expr = expr_t<Float, T>,
+    //           typename Result = Ray<Point<Expr, Size - 1>, Spectrum>>
+    // KAZEN_INLINE Result transform_affine(const Ray<Point<T, Size - 1>, Spectrum> &ray) const {
+    //     return Result(transform_affine(ray.o), transform_affine(ray.d),
+    //                   ray.mint, ray.maxt, ray.time, ray.wavelengths);
+    // }
 
     /// Create a translation transformation
     static Transform translate(const Vector<Float, Size - 1> &v) {
@@ -290,4 +292,4 @@ std::ostream &operator<<(std::ostream &os, const Transform<Point> &t) {
 
 NAMESPACE_END(kazen)
 
-ENOKI_STRUCT_SUPPORT(mitsuba::Transform, matrix, inverseTranspose)
+ENOKI_STRUCT_SUPPORT(kazen::Transform, matrix, inverseTranspose)

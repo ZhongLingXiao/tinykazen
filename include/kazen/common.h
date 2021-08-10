@@ -78,34 +78,6 @@ template <typename Float_> struct TypeAliases {
     using DynamicBuffer = kazen::DynamicBuffer<Float>;
 };
 
-// #define KAZEN_BASE_TYPES()                                                  \
-//     using  TypeAliases      = kazen::TypeAliases<Float>;                    \
-//     using  Mask             = typename TypeAliases::Mask;                   \
-//     using  Int32            = typename TypeAliases::Int32;                  \
-//     using  Vector1f         = typename TypeAliases::Vector1f;               \
-//     using  Vector2f         = typename TypeAliases::Vector2f;               \
-//     using  Vector3f         = typename TypeAliases::Vector3f;               \
-//     using  Vector4f         = typename TypeAliases::Vector4f;               \
-//     using  Point1i          = typename TypeAliases::Point1i;                \
-//     using  Point2i          = typename TypeAliases::Point2i;                \
-//     using  Point3i          = typename TypeAliases::Point3i;                \
-//     using  Point4i          = typename TypeAliases::Point4i;                \
-//     using  Point1f          = typename TypeAliases::Point1f;                \
-//     using  Point2f          = typename TypeAliases::Point2f;                \
-//     using  Point3f          = typename TypeAliases::Point3f;                \
-//     using  Point4f          = typename TypeAliases::Point4f;                \
-//     using  Normal3f         = typename TypeAliases::Normal3f;               \
-//     using  Frame3f          = typename TypeAliases::Frame3f;                \
-//     using  Color3f          = typename TypeAliases::Color3f;                \
-//     using  Color4f          = typename TypeAliases::Color4f;                \
-//     using  BoundingBox1f    = typename TypeAliases::BoundingBox1f;          \
-//     using  BoundingBox2f    = typename TypeAliases::BoundingBox2f;          \
-//     using  BoundingBox3f    = typename TypeAliases::BoundingBox3f;          \
-//     using  BoundingBox4f    = typename TypeAliases::BoundingBox4f;          \
-//     using  Transform3f      = typename TypeAliases::Transform3f;            \
-//     using  Transform4f      = typename TypeAliases::Transform4f;            \
-//     using  Ray3f            = typename TypeAliases::Ray3f;                  \
-
 #define KAZEN_BASE_TYPES_PREFIX(Float_, prefix)                                                     \
     using prefix ## TypeAliases     = kazen::TypeAliases<Float_>;                                   \
     using prefix ## Mask            = typename prefix ## TypeAliases::Mask;                         \
@@ -135,9 +107,9 @@ template <typename Float_> struct TypeAliases {
     using prefix ## Ray3f           = typename prefix ## TypeAliases::Ray3f;
 
 #define KAZEN_BASE_TYPES()                                                                          \
-    KAZEN_BASE_TYPES_PREFIX(Float, )                                                                \
     using ScalarFloat = scalar_t<Float>;                                                            \
-    KAZEN_BASE_TYPES_PREFIX(ScalarFloat, Scalar)
+    KAZEN_BASE_TYPES_PREFIX(ScalarFloat, Scalar)                                                    \
+    KAZEN_BASE_TYPES_PREFIX(Float, /* no-prefix */)
 
 
 /// kazen renderer types
@@ -261,7 +233,8 @@ NAMESPACE_BEGIN(string)
 NAMESPACE_END(string)
 
 
-NAMESPACE_BEGIN(variant)
+/// variant
+NAMESPACE_BEGIN()
     /**
      * \brief Basic C++11 variant data structure
      *
@@ -473,7 +446,7 @@ NAMESPACE_BEGIN(variant)
         }
     };
 
-NAMESPACE_END(variant)
+NAMESPACE_END()
 
 
 

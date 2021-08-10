@@ -14,9 +14,19 @@ int main()
     KAZEN_BASE_TYPES()
     
     // main test 
-    variant::variant<int, float, Vector3f> x;
-    x = Vector3f(1, 1, 1);
-    std::cout << x.is<Ray3f>() << '\n';
+
+
+
+
+
+
+
+    // // ---------------- PropertyList ----------------
+    // PropertyList list;
+    // list.setInt("index", 15);
+    // list.setFloat("base", 0.35f);
+    // list.setColor3f("color", ScalarColor3f(1.0, 0.2, 0.5));
+    // std::cout << list << '\n';
 
     // // ---------------- warp ----------------
     // Point2f o(0.1, 0.3);
