@@ -9,9 +9,7 @@
 
 
 ## Build
-
 `rez-env`环境需求:
-
 ```python
 requires = [
     "cmake-3.20",
@@ -30,8 +28,6 @@ requires = [
 ```
 
 
-
 ## Feature
-
 - TODO
 
