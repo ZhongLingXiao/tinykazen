@@ -1,6 +1,6 @@
 
 
-<img src="hhttps://github.com/ZhongLingXiao/tinykazen/blob/main/doc/logo.png" style="zoom:50%;" />
+<img src="https://github.com/ZhongLingXiao/tinykazen/blob/main/doc/logo.png" width="120" height="120" alt="kazen logo">
 
 # TinyKazen
 
