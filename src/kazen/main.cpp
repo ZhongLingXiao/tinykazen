@@ -5,21 +5,21 @@
 #include <kazen/bbox.h>
 #include <kazen/warp.h>
 #include <kazen/proplist.h>
+#include <kazen/rfilter.h>
+
 using namespace kazen;
 
 int main()
 {
     // TODO: 这大哥有点意思
-    using Float = Packet<float>;
-    KAZEN_BASE_TYPES()
+    // using Float = Packet<float>;
+    // KAZEN_BASE_TYPES()
     
     // main test 
-
-
-
-
-
-
+    PropertyList list;
+    list.setInt("index", 15);
+    auto result = ObjectFactory::createInstance("tent", list);
+    std::cout << result->toString() << '\n';
 
     // // ---------------- PropertyList ----------------
     // PropertyList list;

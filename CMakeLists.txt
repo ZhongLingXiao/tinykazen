@@ -49,6 +49,8 @@ add_executable(kazen
     include/kazen/frame.h
     include/kazen/object.h
     include/kazen/proplist.h
+    include/kazen/ray.h
+    include/kazen/rfilter.h
     include/kazen/timer.h
     include/kazen/vector.h
     include/kazen/transform.h
@@ -58,7 +60,8 @@ add_executable(kazen
     src/kazen/core/common.cpp
     src/kazen/core/object.cpp
     src/kazen/core/proplist.cpp
-    
+    src/kazen/core/rfilter.cpp
+
     # main.cpp
     src/kazen/main.cpp
 )
