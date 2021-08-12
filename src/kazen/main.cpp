@@ -6,20 +6,29 @@
 #include <kazen/warp.h>
 #include <kazen/proplist.h>
 #include <kazen/rfilter.h>
+#include <kazen/progress.h>
 
 using namespace kazen;
-
+#include <thread>
+#include <chrono> 
 int main()
 {
-    // TODO: 这大哥有点意思
     // using Float = Packet<float>;
     // KAZEN_BASE_TYPES()
     
     // main test 
-    PropertyList list;
-    list.setInt("index", 15);
-    auto result = ObjectFactory::createInstance("tent", list);
-    std::cout << result->toString() << '\n';
+
+    auto p = Progress("Rendering...");
+    for (int i = 0; i <= 100; i++) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        p.update(i/100.0);
+    }
+
+    // // ---------------- Object ----------------
+    // PropertyList list;
+    // list.setInt("index", 15);
+    // auto result = ObjectFactory::createInstance("tent", list);
+    // std::cout << result->toString() << '\n';
 
     // // ---------------- PropertyList ----------------
     // PropertyList list;

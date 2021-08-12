@@ -11,6 +11,18 @@ project(kazen)
 find_package(fmt 8.0.1 REQUIRED)
 
 
+# Set platform-specific flags
+if (WIN32)
+  add_definitions(-D__WINDOWS__)
+elseif(UNIX)
+  if(APPLE)
+    add_definitions(-D__OSX__)
+  else()
+    add_definitions(-D__LINUX__)
+  endif()
+endif()
+
+
 # C++17
 include(CheckCXXCompilerFlag)
 if (CMAKE_CXX_COMPILER_ID MATCHES "^(GNU|Clang|Emscripten|Intel)$")
@@ -49,8 +61,9 @@ add_executable(kazen
     include/kazen/frame.h
     include/kazen/object.h
     include/kazen/proplist.h
+    include/kazen/progress.h
     include/kazen/ray.h
-    include/kazen/rfilter.h
+    include/kazen/rfilter.h  
     include/kazen/timer.h
     include/kazen/vector.h
     include/kazen/transform.h
@@ -59,6 +72,7 @@ add_executable(kazen
     # source code
     src/kazen/core/common.cpp
     src/kazen/core/object.cpp
+    src/kazen/core/progress.cpp
     src/kazen/core/proplist.cpp
     src/kazen/core/rfilter.cpp
 

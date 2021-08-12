@@ -42,7 +42,7 @@ using DynamicBuffer = std::conditional_t< is_dynamic_array_v<T>, T, DynamicArray
 template <typename Float_> struct TypeAliases {
     using Float   = Float_;
     using Int32   = int32_array_t<Float>;
-    
+    using UInt32  = uint32_array_t<Float>;
     using Mask    = mask_t<Float>;
 
     using Vector1f = Vector<Float, 1>;
@@ -82,6 +82,7 @@ template <typename Float_> struct TypeAliases {
     using prefix ## TypeAliases     = kazen::TypeAliases<Float_>;                                   \
     using prefix ## Mask            = typename prefix ## TypeAliases::Mask;                         \
     using prefix ## Int32           = typename prefix ## TypeAliases::Int32;                        \
+    using prefix ## UInt32          = typename prefix ## TypeAliases::UInt32;                       \
     using prefix ## Vector1f        = typename prefix ## TypeAliases::Vector1f;                     \
     using prefix ## Vector2f        = typename prefix ## TypeAliases::Vector2f;                     \
     using prefix ## Vector3f        = typename prefix ## TypeAliases::Vector3f;                     \
@@ -123,9 +124,8 @@ class KDTree;
 class Emitter;
 struct EmitterQueryRecord;
 class Mesh;
-class NoriObject;
-class NoriObjectFactory;
-class NoriScreen;
+class Object;
+class ObjectFactory;
 class PhaseFunction;
 class ReconstructionFilter;
 class Sampler;
@@ -139,8 +139,14 @@ public:
         : std::runtime_error(fmt::format(fmt, args...)) { }
 };
 
-/// Convert a time value in milliseconds into a human-readable string
-extern std::string timeString(double time, bool precise = false);
+
+/// util
+NAMESPACE_BEGIN(util)
+    /// Determine the width of the terminal window that is used to run kazen
+    extern int terminalWidth();
+    /// Convert a time value in milliseconds into a human-readable string
+    extern std::string timeString(double time, bool precise = false);
+NAMESPACE_END(util)
 
 
 /// math 
