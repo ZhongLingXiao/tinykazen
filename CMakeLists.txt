@@ -70,11 +70,11 @@ add_executable(kazen
     include/kazen/warp.h
 
     # source code
-    src/kazen/core/common.cpp
-    src/kazen/core/object.cpp
-    src/kazen/core/progress.cpp
-    src/kazen/core/proplist.cpp
-    src/kazen/core/rfilter.cpp
+    src/kazen/common.cpp
+    src/kazen/object.cpp
+    src/kazen/progress.cpp
+    src/kazen/proplist.cpp
+    src/kazen/rfilter.cpp
 
     # main.cpp
     src/kazen/main.cpp

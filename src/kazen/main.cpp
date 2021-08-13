@@ -18,11 +18,17 @@ int main()
     
     // main test 
 
-    auto p = Progress("Rendering...");
-    for (int i = 0; i <= 100; i++) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
-        p.update(i/100.0);
-    }
+
+
+
+
+
+    // // ---------------- Progressbar ----------------
+    // auto p = Progress("Rendering...");
+    // for (int i = 0; i <= 100; i++) {
+    //     std::this_thread::sleep_for(std::chrono::milliseconds(50));
+    //     p.update(i/100.0);
+    // }
 
     // // ---------------- Object ----------------
     // PropertyList list;
