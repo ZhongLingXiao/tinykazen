@@ -73,6 +73,7 @@ add_executable(kazen
     # source code
     src/kazen/block.cpp
     src/kazen/common.cpp
+    src/kazen/independent.cpp
     src/kazen/object.cpp
     src/kazen/progress.cpp
     src/kazen/proplist.cpp

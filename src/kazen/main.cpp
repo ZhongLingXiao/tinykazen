@@ -8,6 +8,7 @@
 #include <kazen/rfilter.h>
 #include <kazen/progress.h>
 #include <kazen/block.h>
+#include <kazen/sampler.h>
 
 using namespace kazen;
 #include <thread>
@@ -42,6 +43,12 @@ int main()
     
     if (filter)
         delete filter;
+
+    // // ---------------- sampler ----------------
+    // PropertyList list;
+    // list.setInt("sampleCount", 4);
+    // Sampler* result = static_cast<Sampler*>(ObjectFactory::createInstance("independent", list));
+    // std::cout << result->next1D() << '\n';
 
     // // ---------------- Progressbar ----------------
     // auto p = Progress("Rendering...");
