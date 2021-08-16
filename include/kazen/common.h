@@ -45,6 +45,16 @@ template <typename Float_> struct TypeAliases {
     using UInt32  = uint32_array_t<Float>;
     using Mask    = mask_t<Float>;
 
+    using Vector1i = Vector<Int32, 1>;
+    using Vector2i = Vector<Int32, 2>;
+    using Vector3i = Vector<Int32, 3>;
+    using Vector4i = Vector<Int32, 4>;
+
+    using Vector1u = Vector<UInt32, 1>;
+    using Vector2u = Vector<UInt32, 2>;
+    using Vector3u = Vector<UInt32, 3>;
+    using Vector4u = Vector<UInt32, 4>;
+
     using Vector1f = Vector<Float, 1>;
     using Vector2f = Vector<Float, 2>;
     using Vector3f = Vector<Float, 3>;
@@ -54,6 +64,11 @@ template <typename Float_> struct TypeAliases {
     using Point2i = Point<Int32, 2>;
     using Point3i = Point<Int32, 3>;
     using Point4i = Point<Int32, 4>;
+
+    using Point1u = Point<UInt32, 1>;
+    using Point2u = Point<UInt32, 2>;
+    using Point3u = Point<UInt32, 3>;
+    using Point4u = Point<UInt32, 4>;
 
     using Point1f = Point<Float, 1>;
     using Point2f = Point<Float, 2>;
@@ -83,6 +98,14 @@ template <typename Float_> struct TypeAliases {
     using prefix ## Mask            = typename prefix ## TypeAliases::Mask;                         \
     using prefix ## Int32           = typename prefix ## TypeAliases::Int32;                        \
     using prefix ## UInt32          = typename prefix ## TypeAliases::UInt32;                       \
+    using prefix ## Vector1i        = typename prefix ## TypeAliases::Vector1i;                     \
+    using prefix ## Vector2i        = typename prefix ## TypeAliases::Vector2i;                     \
+    using prefix ## Vector3i        = typename prefix ## TypeAliases::Vector3i;                     \
+    using prefix ## Vector4i        = typename prefix ## TypeAliases::Vector4i;                     \
+    using prefix ## Vector1u        = typename prefix ## TypeAliases::Vector1u;                     \
+    using prefix ## Vector2u        = typename prefix ## TypeAliases::Vector2u;                     \
+    using prefix ## Vector3u        = typename prefix ## TypeAliases::Vector3u;                     \
+    using prefix ## Vector4u        = typename prefix ## TypeAliases::Vector4u;                     \
     using prefix ## Vector1f        = typename prefix ## TypeAliases::Vector1f;                     \
     using prefix ## Vector2f        = typename prefix ## TypeAliases::Vector2f;                     \
     using prefix ## Vector3f        = typename prefix ## TypeAliases::Vector3f;                     \
@@ -91,6 +114,10 @@ template <typename Float_> struct TypeAliases {
     using prefix ## Point2i         = typename prefix ## TypeAliases::Point2i;                      \
     using prefix ## Point3i         = typename prefix ## TypeAliases::Point3i;                      \
     using prefix ## Point4i         = typename prefix ## TypeAliases::Point4i;                      \
+    using prefix ## Point1u         = typename prefix ## TypeAliases::Point1u;                      \
+    using prefix ## Point2u         = typename prefix ## TypeAliases::Point2u;                      \
+    using prefix ## Point3u         = typename prefix ## TypeAliases::Point3u;                      \
+    using prefix ## Point4u         = typename prefix ## TypeAliases::Point4u;                      \
     using prefix ## Point1f         = typename prefix ## TypeAliases::Point1f;                      \
     using prefix ## Point2f         = typename prefix ## TypeAliases::Point2f;                      \
     using prefix ## Point3f         = typename prefix ## TypeAliases::Point3f;                      \

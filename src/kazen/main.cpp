@@ -7,21 +7,41 @@
 #include <kazen/proplist.h>
 #include <kazen/rfilter.h>
 #include <kazen/progress.h>
+#include <kazen/block.h>
 
 using namespace kazen;
 #include <thread>
 #include <chrono> 
 int main()
 {
-    // using Float = Packet<float>;
-    // KAZEN_BASE_TYPES()
+    using Float = float;//Packet<float>;
+    KAZEN_BASE_TYPES()
     
     // main test 
 
+    // // ---------------- image block ----------------
+    auto size = Vector2i(60, 60);
+    auto b = BlockGenerator(size, KAZEN_BLOCK_SIZE);
 
+    PropertyList list;
+    list.setInt("index", 4);
+    ReconstructionFilter* filter = static_cast<ReconstructionFilter*>(ObjectFactory::createInstance("tent", list));
+    ImageBlock block(Vector2i(KAZEN_BLOCK_SIZE), filter);
 
-
-
+    // next()
+    std::cout << b.getBlockCount() << '\n';
+    std::cout << (b.next(block)? "true" : "false") << block.getSize() << '\n';
+    std::cout << b.getBlockCount() << '\n';
+    std::cout <<  (b.next(block)? "true": "false") << block.getSize() << '\n';
+    std::cout << b.getBlockCount() << '\n';
+    std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
+    std::cout << b.getBlockCount() << '\n';
+    std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
+    std::cout << b.getBlockCount() << '\n';
+    std::cout <<  (b.next(block)? "true" : "false") << '\n'; // false
+    
+    if (filter)
+        delete filter;
 
     // // ---------------- Progressbar ----------------
     // auto p = Progress("Rendering...");

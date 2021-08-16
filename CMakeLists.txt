@@ -5,7 +5,7 @@ project(kazen)
 
 # find packages under rez-env
 # find_package(Boost REQUIRED COMPONENTS filesystem system)
-# find_package(TBB REQUIRED COMPONENTS tbb)
+find_package(TBB REQUIRED COMPONENTS tbb)
 # find_package(OpenImageIO REQUIRED)
 # find_package(embree 3.13.0 REQUIRED) # Here should point a spesific version
 find_package(fmt 8.0.1 REQUIRED)
@@ -48,12 +48,13 @@ endif()
 add_subdirectory($ENV{REZ_ENOKI_ROOT} ext_build)
 enoki_set_compile_flags()
 enoki_set_native_flags()
-include_directories($ENV{REZ_ENOKI_ROOT}/include)
+# include_directories($ENV{REZ_ENOKI_ROOT}/include)
 
 # Add executable
 add_executable(kazen 
     # headers
     include/kazen/bbox.h
+    include/kazen/block.h
     include/kazen/color.h
     include/kazen/common.h
     include/kazen/define.h
@@ -70,6 +71,7 @@ add_executable(kazen
     include/kazen/warp.h
 
     # source code
+    src/kazen/block.cpp
     src/kazen/common.cpp
     src/kazen/object.cpp
     src/kazen/progress.cpp
@@ -83,7 +85,7 @@ add_executable(kazen
 # link against target
 target_link_libraries(kazen PUBLIC
     # Boost::filesystem
-    # TBB::tbb
+    TBB::tbb
     # OpenImageIO::OpenImageIO
     # embree
     fmt::fmt
@@ -95,7 +97,7 @@ target_include_directories(kazen PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     
     # ## enoki ##
-    # $ENV{REZ_ENOKI_ROOT}/include
+    $ENV{REZ_ENOKI_ROOT}/include
 )
 
 
