@@ -9,6 +9,7 @@
 #include <kazen/progress.h>
 #include <kazen/block.h>
 #include <kazen/sampler.h>
+#include <kazen/bitmap.h>
 
 using namespace kazen;
 #include <thread>
@@ -31,9 +32,13 @@ int main()
     ImageBlock block(Vector2i(KAZEN_BLOCK_SIZE), filter);
     image.clear();
     block.clear();
+    
+    
     // put
     image.put(block);
 
+    image.toBitmap();
+    // fmt::print("[kazen debug]: {}", debugInfo);
 
     // next()
     // std::cout << b.getBlockCount() << '\n';

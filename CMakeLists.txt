@@ -6,9 +6,9 @@ project(kazen)
 # find packages under rez-env
 # find_package(Boost REQUIRED COMPONENTS filesystem system)
 find_package(TBB REQUIRED COMPONENTS tbb)
-# find_package(OpenImageIO REQUIRED)
+find_package(OpenImageIO REQUIRED)
 # find_package(embree 3.13.0 REQUIRED) # Here should point a spesific version
-find_package(fmt 8.0.1 REQUIRED)
+find_package(fmt 7.1.3 REQUIRED)
 
 
 # Set platform-specific flags
@@ -54,6 +54,7 @@ enoki_set_native_flags()
 add_executable(kazen 
     # headers
     include/kazen/bbox.h
+    include/kazen/bitmap.h
     include/kazen/block.h
     include/kazen/color.h
     include/kazen/common.h
@@ -71,6 +72,7 @@ add_executable(kazen
     include/kazen/warp.h
 
     # source code
+    src/kazen/bitmap.cpp
     src/kazen/block.cpp
     src/kazen/common.cpp
     src/kazen/independent.cpp
@@ -87,7 +89,7 @@ add_executable(kazen
 target_link_libraries(kazen PUBLIC
     # Boost::filesystem
     TBB::tbb
-    # OpenImageIO::OpenImageIO
+    OpenImageIO::OpenImageIO
     # embree
     fmt::fmt
 )

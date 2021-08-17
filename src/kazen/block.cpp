@@ -1,5 +1,6 @@
 #include <kazen/block.h>
 #include <kazen/rfilter.h>
+#include <kazen/bitmap.h>
 #include <tbb/tbb.h>
 
 NAMESPACE_BEGIN(kazen)
@@ -19,10 +20,6 @@ ImageBlock::ImageBlock(const ScalarVector2i &size, const ReconstructionFilter *f
         int weightSize = (int) std::ceil(2 * m_filterRadius) + 1;
         m_weightsX = new Float[2 * weightSize];
         m_weightsY = m_weightsX + weightSize;
-        // m_weightsX = new Float[weightSize];
-        // m_weightsY = new Float[weightSize];
-        // memset(m_weightsX, 0, sizeof(ScalarFloat) * weightSize);
-        // memset(m_weightsY, 0, sizeof(ScalarFloat) * weightSize);
     }
 
     /* Allocate space for pixels and border regions */
@@ -50,13 +47,13 @@ void ImageBlock::setSize(const ScalarVector2i &size) {
 }
 
 
-// Bitmap *ImageBlock::toBitmap() const {
-//     Bitmap *result = new Bitmap(m_size);
-//     for (int y=0; y<m_size.y(); ++y)
-//         for (int x=0; x<m_size.x(); ++x)
-//             result->coeffRef(y, x) = coeff(y + m_borderSize, x + m_borderSize).divideByFilterWeight();
-//     return result;
-// }
+Bitmap *ImageBlock::toBitmap() const {
+    Bitmap *result = new Bitmap(m_size);
+    // for (int y=0; y<m_size.y(); ++y)
+    //     for (int x=0; x<m_size.x(); ++x)
+    //         result->coeffRef(y, x) = coeff(y + m_borderSize, x + m_borderSize).divideByFilterWeight();
+    return result;
+}
 
 // void ImageBlock::fromBitmap(const Bitmap &bitmap) {
 //     if (bitmap.cols() != cols() || bitmap.rows() != rows())
