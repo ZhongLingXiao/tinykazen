@@ -4,7 +4,7 @@
 
 NAMESPACE_BEGIN(kazen)
 
-ImageBlock::ImageBlock(const ScalarVector2i &size, const ReconstructionFilter *filter) : m_offset(0, 0), m_size(size) {
+ImageBlock::ImageBlock(const ScalarVector2i &size, const ReconstructionFilter *filter) : m_offset(0), m_size(0) {
     if (filter) {
         /* Tabulate the image reconstruction filter for performance reasons */
         m_filterRadius = filter->getRadius();
@@ -37,6 +37,10 @@ ImageBlock::~ImageBlock() {
         delete[] m_weightsX;
 }
 
+void ImageBlock::clear() {
+    size_t size = KAZEN_CHANNEL_COUNT * enoki::hprod(m_size + 2 * m_borderSize);
+    memset(m_data.data(), 0, size * sizeof(ScalarFloat));
+}
 
 void ImageBlock::setSize(const ScalarVector2i &size) {
     if (size == m_size)

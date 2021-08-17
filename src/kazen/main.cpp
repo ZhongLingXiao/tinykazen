@@ -27,19 +27,25 @@ int main()
     PropertyList list;
     list.setInt("index", 4);
     ReconstructionFilter* filter = static_cast<ReconstructionFilter*>(ObjectFactory::createInstance("tent", list));
+    ImageBlock image(size, filter);
     ImageBlock block(Vector2i(KAZEN_BLOCK_SIZE), filter);
+    image.clear();
+    block.clear();
+    // put
+    image.put(block);
+
 
     // next()
-    std::cout << b.getBlockCount() << '\n';
-    std::cout << (b.next(block)? "true" : "false") << block.getSize() << '\n';
-    std::cout << b.getBlockCount() << '\n';
-    std::cout <<  (b.next(block)? "true": "false") << block.getSize() << '\n';
-    std::cout << b.getBlockCount() << '\n';
-    std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
-    std::cout << b.getBlockCount() << '\n';
-    std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
-    std::cout << b.getBlockCount() << '\n';
-    std::cout <<  (b.next(block)? "true" : "false") << '\n'; // false
+    // std::cout << b.getBlockCount() << '\n';
+    // std::cout << (b.next(block)? "true" : "false") << block.getSize() << '\n';
+    // std::cout << b.getBlockCount() << '\n';
+    // std::cout <<  (b.next(block)? "true": "false") << block.getSize() << '\n';
+    // std::cout << b.getBlockCount() << '\n';
+    // std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
+    // std::cout << b.getBlockCount() << '\n';
+    // std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
+    // std::cout << b.getBlockCount() << '\n';
+    // std::cout <<  (b.next(block)? "true" : "false") << '\n'; // false
     
     if (filter)
         delete filter;

@@ -40,6 +40,9 @@ public:
     /// Release all memory
     ~ImageBlock();
     
+    /// Clear everything to zero.
+    void clear();
+    
     /// Configure the offset of the block within the main image
     void setOffset(const ScalarPoint2i &offset) { m_offset = offset; }
 
