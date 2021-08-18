@@ -33,11 +33,12 @@ int main()
     image.clear();
     block.clear();
     
-    
     // put
     image.put(block);
 
-    image.toBitmap();
+    auto png = image.toBitmap();
+    png->savePNG("foo");
+
     // fmt::print("[kazen debug]: {}", debugInfo);
 
     // next()

@@ -15,7 +15,7 @@ public:
     using Float = float;
     KAZEN_BASE_TYPES()    
 
-    Bitmap(const ScalarVector2i &size);
+    Bitmap(const ScalarVector2i &size, ScalarFloat *data = nullptr);
 
     /// Clear the bitmap to zero
     void clear();
@@ -32,7 +32,7 @@ private:
 
 private:
     ScalarVector2i m_size;
-    std::unique_ptr<uint8_t[]> m_data;
+    std::unique_ptr<ScalarFloat[]> m_data;
 };
 
 NAMESPACE_END(kazen)

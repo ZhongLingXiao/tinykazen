@@ -48,10 +48,7 @@ void ImageBlock::setSize(const ScalarVector2i &size) {
 
 
 Bitmap *ImageBlock::toBitmap() const {
-    Bitmap *result = new Bitmap(m_size);
-    // for (int y=0; y<m_size.y(); ++y)
-    //     for (int x=0; x<m_size.x(); ++x)
-    //         result->coeffRef(y, x) = coeff(y + m_borderSize, x + m_borderSize).divideByFilterWeight();
+    Bitmap *result = new Bitmap(m_size, (float*)m_data.data());
     return result;
 }
 
