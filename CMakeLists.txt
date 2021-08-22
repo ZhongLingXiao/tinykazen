@@ -5,7 +5,7 @@ project(kazen)
 
 # find packages under rez-env
 # find_package(Boost REQUIRED COMPONENTS filesystem system)
-find_package(TBB REQUIRED COMPONENTS tbb)
+find_package(TBB REQUIRED)
 find_package(OpenImageIO REQUIRED)
 # find_package(embree 3.13.0 REQUIRED) # Here should point a spesific version
 find_package(fmt 7.1.3 REQUIRED)
@@ -65,6 +65,7 @@ add_executable(kazen
     include/kazen/proplist.h
     include/kazen/progress.h
     include/kazen/ray.h
+    include/kazen/renderer.h
     include/kazen/rfilter.h  
     include/kazen/timer.h
     include/kazen/vector.h
@@ -75,11 +76,12 @@ add_executable(kazen
     src/kazen/bitmap.cpp
     src/kazen/block.cpp
     src/kazen/common.cpp
-    src/kazen/independent.cpp
     src/kazen/object.cpp
     src/kazen/progress.cpp
     src/kazen/proplist.cpp
+    src/kazen/renderer.cpp
     src/kazen/rfilter.cpp
+    src/kazen/sampler.cpp
 
     # main.cpp
     src/kazen/main.cpp
@@ -101,6 +103,9 @@ target_include_directories(kazen PUBLIC
     
     # ## enoki ##
     $ENV{REZ_ENOKI_ROOT}/include
+
+    # ## tbb ##
+    $ENV{REZ_TBB_ROOT}/include    
 )
 
 

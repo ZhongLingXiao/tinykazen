@@ -10,10 +10,15 @@
 #include <kazen/block.h>
 #include <kazen/sampler.h>
 #include <kazen/bitmap.h>
+#include <kazen/renderer.h>
+
+
+// #include <array>
+// #include <tbb/blocked_range.h>
+// #include <tbb/parallel_for.h>
 
 using namespace kazen;
-#include <thread>
-#include <chrono> 
+
 int main()
 {
     using Float = float;//Packet<float>;
@@ -21,40 +26,46 @@ int main()
     
     // main test 
 
+    Renderer renderer;
+    renderer.render(nullptr, "kazen");
+
+
+
+
     // // ---------------- image block ----------------
-    auto size = Vector2i(60, 60);
-    auto b = BlockGenerator(size, KAZEN_BLOCK_SIZE);
+    // auto size = Vector2i(60, 60);
+    // auto b = BlockGenerator(size, KAZEN_BLOCK_SIZE);
 
-    PropertyList list;
-    list.setInt("index", 4);
-    ReconstructionFilter* filter = static_cast<ReconstructionFilter*>(ObjectFactory::createInstance("tent", list));
-    ImageBlock image(size, filter);
-    ImageBlock block(Vector2i(KAZEN_BLOCK_SIZE), filter);
-    image.clear();
-    block.clear();
+    // PropertyList list;
+    // list.setInt("index", 4);
+    // ReconstructionFilter* filter = static_cast<ReconstructionFilter*>(ObjectFactory::createInstance("tent", list));
+    // ImageBlock image(size, filter);
+    // ImageBlock block(Vector2i(KAZEN_BLOCK_SIZE), filter);
+    // image.clear();
+    // block.clear();
     
-    // put
-    image.put(block);
+    // // put
+    // image.put(block);
 
-    auto png = image.toBitmap();
-    png->savePNG("foo");
+    // auto png = image.toBitmap();
+    // png->savePNG("foo");
 
-    // fmt::print("[kazen debug]: {}", debugInfo);
+    // // fmt::print("[kazen debug]: {}", debugInfo);
 
-    // next()
-    // std::cout << b.getBlockCount() << '\n';
-    // std::cout << (b.next(block)? "true" : "false") << block.getSize() << '\n';
-    // std::cout << b.getBlockCount() << '\n';
-    // std::cout <<  (b.next(block)? "true": "false") << block.getSize() << '\n';
-    // std::cout << b.getBlockCount() << '\n';
-    // std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
-    // std::cout << b.getBlockCount() << '\n';
-    // std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
-    // std::cout << b.getBlockCount() << '\n';
-    // std::cout <<  (b.next(block)? "true" : "false") << '\n'; // false
+    // // next()
+    // // std::cout << b.getBlockCount() << '\n';
+    // // std::cout << (b.next(block)? "true" : "false") << block.getSize() << '\n';
+    // // std::cout << b.getBlockCount() << '\n';
+    // // std::cout <<  (b.next(block)? "true": "false") << block.getSize() << '\n';
+    // // std::cout << b.getBlockCount() << '\n';
+    // // std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
+    // // std::cout << b.getBlockCount() << '\n';
+    // // std::cout <<  (b.next(block)? "true" : "false") << block.getSize() << '\n';
+    // // std::cout << b.getBlockCount() << '\n';
+    // // std::cout <<  (b.next(block)? "true" : "false") << '\n'; // false
     
-    if (filter)
-        delete filter;
+    // if (filter)
+    //     delete filter;
 
     // // ---------------- sampler ----------------
     // PropertyList list;

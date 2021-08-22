@@ -27,6 +27,8 @@ public:
     void savePNG(const std::string &filename);
 
 private:
+    size_t pixelCount() const { return m_size.x() * (size_t) m_size.y(); }
+
     /// Return the bitmap size in bytes (excluding metadata)
     size_t bufferSize() const;    
 

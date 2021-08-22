@@ -19,7 +19,7 @@ void Bitmap::clear() {
 }
 
 size_t Bitmap::bufferSize() const {
-    return m_size[0] * m_size[1] * KAZEN_BITMAP_CHANNEL_COUNT * sizeof(ScalarFloat);
+    return pixelCount() * KAZEN_BITMAP_CHANNEL_COUNT * sizeof(ScalarFloat);
 }
 
 void Bitmap::saveEXR(const std::string &filename) {
@@ -33,11 +33,11 @@ void Bitmap::savePNG(const std::string &filename) {
 
     std::string path = filename + ".png";
 
-    uint8_t *rgb8 = new uint8_t[3 * m_size[0] * m_size[1]];
+    uint8_t *rgb8 = new uint8_t[3 * pixelCount()];
     uint8_t *dst = rgb8;
-    for (int i = 0; i <  m_size[0]; ++i) {
-        for (int j = 0; j <  m_size[1]; ++j) {
-            auto index = i * m_size[0] + m_size[1];
+    for (int i = 0; i <  m_size.x(); ++i) {
+        for (int j = 0; j <  m_size.y(); ++j) {
+            auto index = i * m_size.x() + m_size.y();
             dst[0] = (uint8_t) std::clamp(255.f * enoki::linear_to_srgb(m_data[index]), 0.f, 255.f);
             dst[1] = (uint8_t) std::clamp(255.f * enoki::linear_to_srgb(m_data[index+1]), 0.f, 255.f);
             dst[2] = (uint8_t) std::clamp(255.f * enoki::linear_to_srgb(m_data[index+2]), 0.f, 255.f);
