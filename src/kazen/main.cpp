@@ -11,7 +11,7 @@
 #include <kazen/sampler.h>
 #include <kazen/bitmap.h>
 #include <kazen/renderer.h>
-
+#include <kazen/transform.h>
 
 // #include <array>
 // #include <tbb/blocked_range.h>
@@ -26,11 +26,20 @@ int main()
     
     // main test 
 
-    Renderer renderer;
-    renderer.render(nullptr, "kazen");
+    // // ---------------- camera ----------------
+    std::cout << ScalarTransform4f() << '\n';
 
+    auto aspect = 1280/(ScalarFloat)720;
+    auto sampleToCamera = 
+            ScalarTransform4f::scale(Vector3f(-0.5f, -0.5f * aspect, 1.f)) *
+            ScalarTransform4f::translate(Vector3f(-1.f, -1.f / aspect, 0.f)) * 
+            ScalarTransform4f::perspective(50.0, 0.1, 10000.0);
 
+    std::cout << sampleToCamera << '\n';
 
+    // // ---------------- Render ----------------
+    // Renderer renderer;
+    // renderer.render(nullptr, "kazen");
 
     // // ---------------- image block ----------------
     // auto size = Vector2i(60, 60);

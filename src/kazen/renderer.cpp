@@ -15,9 +15,9 @@
 
 NAMESPACE_BEGIN(kazen)
 
-// void renderSample(const Scene *scene, Sampler *sampler, ImageBlock &block, const Vector2f &pos, Mask active) {
-//     // TODO
-// }
+void Renderer::renderSample(const Scene *scene, Sampler *sampler, ImageBlock &block, const Vector2f &pos, Mask active) {
+    // TODO
+}
 
 void Renderer::renderBlock(const Scene *scene, Sampler *sampler, ImageBlock &block) {
     #include <unistd.h>

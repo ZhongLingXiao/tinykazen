@@ -3,6 +3,7 @@
 #include <kazen/common.h>
 #include <kazen/ray.h>
 #include <enoki/transform.h>
+#include <enoki/matrix.h>
 
 NAMESPACE_BEGIN(kazen)
 
@@ -18,16 +19,16 @@ NAMESPACE_BEGIN(kazen)
 template <typename Point_> struct Transform {
     static constexpr size_t Size = Point_::Size;
 
-    using Float   = value_t<Point_>;
+    using Float   = enoki::value_t<Point_>;
     using Matrix  = enoki::Matrix<Float, Size>;
-    using Mask    = mask_t<Float>;
-    using Scalar  = scalar_t<Float>;
+    using Mask    = enoki::mask_t<Float>;
+    using Scalar  = enoki::scalar_t<Float>;
 
     // =============================================================
     // Fields
     // =============================================================
-    Matrix matrix           = enoki::detail::identity<Matrix>();
-    Matrix inverseTranspose = enoki::detail::identity<Matrix>();
+    Matrix matrix           = enoki::identity<Matrix>();
+    Matrix inverseTranspose = enoki::identity<Matrix>();
 
     // =============================================================
     // Constructors, methods, etc.
@@ -189,8 +190,8 @@ template <typename Point_> struct Transform {
         Float recip = 1.f / (far_ - near_);
 
         /* Perform a scale so that the field of view is mapped to the interval [-1, 1] */
-        Float tan = enoki::tan(deg_to_rad(fov * .5f)),
-              cot = 1.f / tan;
+        Float tan = enoki::tan(enoki::deg_to_rad(fov * .5f));
+        Float cot = 1.f / tan;
 
         Matrix trafo = diag<Matrix>(Vector<Float, Size>(cot, cot, far_ * recip, 0.f));
         trafo(2, 3) = -near_ * far_ * recip;
@@ -278,6 +279,20 @@ template <typename Point_> struct Transform {
         return Transform(result, result);
     }
 
+    /// Test for a scale component in each transform matrix by checking
+    Mask hasScale() const {
+        Mask mask(false);
+        for (size_t i = 0; i < Size - 1; ++i) {
+            for (size_t j = i; j < Size - 1; ++j) {
+                Float sum = 0.f;
+                for (size_t k = 0; k < Size - 1; ++k)
+                    sum += matrix[i][k] * matrix[j][k];
+
+                mask |= enoki::abs(sum - (i == j ? 1.f : 0.f)) > 1e-3f;
+            }
+        }
+        return mask;
+    }
 
     ENOKI_STRUCT(Transform, matrix, inverseTranspose)
 };

@@ -23,6 +23,7 @@
 NAMESPACE_BEGIN(kazen)
 
 NAMESPACE_BEGIN(util)
+    // timeString
     std::string timeString(double time, bool precise)
     {
         if (std::isnan(time) || std::isinf(time))
@@ -49,6 +50,7 @@ NAMESPACE_BEGIN(util)
         return os.str();
     }
 
+    // terminalWidth
     int terminalWidth() {
         static int cachedWidth = -1;
 
@@ -70,6 +72,18 @@ NAMESPACE_BEGIN(util)
         }
 
         return cachedWidth;
+    }
+
+    // memString
+    std::string memString(size_t size, bool precise) {
+        const char *orders[] = { "B", "KB", "MB", "GB", "TB", "PB", "EB"};
+        float value = (float) size;
+        
+        int i=0;
+        for (i = 0; i < 6 && value > 1024.f; ++i)
+            value /= 1024.f;
+        
+        return fmt::format(precise ? "{:.0f}{}" : "{:.3f}{}", value, orders[i]);
     }
 
 NAMESPACE_END(util)
