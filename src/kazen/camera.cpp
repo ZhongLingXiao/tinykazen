@@ -25,7 +25,7 @@ public:
         /* Width and height in pixels. Default: 720p */
         m_outputSize.x() = propList.getInt("width", 1280);
         m_outputSize.y() = propList.getInt("height", 720);
-        m_invOutputSize = m_outputSize.cast<float>().cwiseInverse();
+        m_invOutputSize = enoki::rcp(m_outputSize);
 
         /* Specifies an optional camera-to-world transformation. Default: none */
         m_cameraToWorld = propList.getTransform("toWorld", ScalarTransform4f());
@@ -50,9 +50,7 @@ public:
          *  zProj = (far * (z - near)) / (z * (far-near))
          *  The cotangent factor ensures that the field of view is 
          *  mapped to the interval [-1, 1].
-         */
-
-        /**
+         *
          * Translation and scaling to shift the clip coordinates into the
          * range from zero to one. Also takes the aspect ratio into account.
          */
@@ -69,25 +67,24 @@ public:
 
     Color3f sampleRay(Ray3f &ray,
             const Point2f &samplePosition,
-            const Point2f &apertureSample) const {
-        // /* Compute the corresponding position on the 
-        //    near plane (in local camera space) */
-        // Point3f nearP = m_sampleToCamera * Point3f(
-        //     samplePosition.x() * m_invOutputSize.x(),
-        //     samplePosition.y() * m_invOutputSize.y(), 0.0f);
+            const Point2f &apertureSample,
+            Mask mask=true) const {
+        /* Compute the corresponding position on the near plane (in local camera space) */
+        Point3f nearP = m_sampleToCamera * Point3f(
+            samplePosition.x() * m_invOutputSize.x(),
+            samplePosition.y() * m_invOutputSize.y(), 0.0f);
 
-        // /* Turn into a normalized ray direction, and
-        //    adjust the ray interval accordingly */
-        // Vector3f d = nearP.normalized();
-        // float invZ = 1.0f / d.z();
+        /* Turn into a normalized ray direction, and adjust the ray interval accordingly */
+        Vector3f d = normalize(Vector3f(nearP));
+        float invZ = enoki::rcp(d.z());
 
-        // ray.o = m_cameraToWorld * Point3f(0, 0, 0);
-        // ray.d = m_cameraToWorld * d;
-        // ray.mint = m_nearClip * invZ;
-        // ray.maxt = m_farClip * invZ;
-        // ray.update();
+        ray.o = m_cameraToWorld * Point3f(0, 0, 0);
+        ray.d = m_cameraToWorld * d;
+        ray.mint = m_nearClip * invZ;
+        ray.maxt = m_farClip * invZ;
+        ray.update();
 
-        // return Color3f(1.0f);
+        return Color3f(1.0f);
     }
 
     void addChild(Object *obj) {
