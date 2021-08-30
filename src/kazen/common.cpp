@@ -89,6 +89,7 @@ NAMESPACE_BEGIN(util)
     /// copyright
     std::string copyright() {
         return fmt::format(
+            "\n"
             "=======================================================\n"
             " tinykazen: Physically Based Renderer                  \n"
             " Version Alpha {}.{}.{}a                               \n"
