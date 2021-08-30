@@ -26,16 +26,18 @@ int main()
     
     // main test 
 
+    std::cout << util::copyright() << '\n';
+
     // // ---------------- camera ----------------
-    std::cout << ScalarTransform4f() << '\n';
+    // std::cout << ScalarTransform4f() << '\n';
 
-    auto aspect = 1280/(ScalarFloat)720;
-    auto sampleToCamera = 
-            ScalarTransform4f::scale(Vector3f(-0.5f, -0.5f * aspect, 1.f)) *
-            ScalarTransform4f::translate(Vector3f(-1.f, -1.f / aspect, 0.f)) * 
-            ScalarTransform4f::perspective(50.0, 0.1, 10000.0);
+    // auto aspect = 1280/(ScalarFloat)720;
+    // auto sampleToCamera = 
+    //         ScalarTransform4f::scale(Vector3f(-0.5f, -0.5f * aspect, 1.f)) *
+    //         ScalarTransform4f::translate(Vector3f(-1.f, -1.f / aspect, 0.f)) * 
+    //         ScalarTransform4f::perspective(50.0, 0.1, 10000.0);
 
-    std::cout << sampleToCamera << '\n';
+    // std::cout << sampleToCamera << '\n';
 
     // // ---------------- Render ----------------
     // Renderer renderer;

@@ -174,7 +174,9 @@ NAMESPACE_BEGIN(util)
     /// Convert a time value in milliseconds into a human-readable string
     extern std::string timeString(double time, bool precise = false);
     /// Turn a memory size into a human-readable string
-    extern std::string memString(size_t size, bool precise = false);    
+    extern std::string memString(size_t size, bool precise = false);   
+    /// Return human-readable information about the version
+    extern std::string copyright();    
 NAMESPACE_END(util)
 
 

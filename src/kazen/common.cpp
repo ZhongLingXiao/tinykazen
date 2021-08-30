@@ -86,6 +86,21 @@ NAMESPACE_BEGIN(util)
         return fmt::format(precise ? "{:.0f}{}" : "{:.3f}{}", value, orders[i]);
     }
 
+    /// copyright
+    std::string copyright() {
+        return fmt::format(
+            "=======================================================\n"
+            " tinykazen: Physically Based Renderer                  \n"
+            " Version Alpha {}.{}.{}a                               \n"
+            " Copyright (C) {} {}. All rights reserved.             \n"
+            "=======================================================\n",
+            KAZEN_VERSION_MAJOR,
+            KAZEN_VERSION_MINOR,
+            KAZEN_VERSION_PATCH,
+            KAZEN_YEAR,
+            KAZEN_AUTHORS
+        );
+    }
 NAMESPACE_END(util)
 
 
