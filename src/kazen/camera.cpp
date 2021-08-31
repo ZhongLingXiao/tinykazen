@@ -78,7 +78,7 @@ public:
         Vector3f d = normalize(Vector3f(nearP));
         float invZ = enoki::rcp(d.z());
 
-        ray.o = m_cameraToWorld * Point3f(0, 0, 0);
+        ray.o = m_cameraToWorld.translation();
         ray.d = m_cameraToWorld * d;
         ray.mint = m_nearClip * invZ;
         ray.maxt = m_farClip * invZ;
