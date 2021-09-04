@@ -53,15 +53,6 @@ Bitmap *ImageBlock::toBitmap() const {
     return result;
 }
 
-// void ImageBlock::fromBitmap(const Bitmap &bitmap) {
-//     if (bitmap.cols() != cols() || bitmap.rows() != rows())
-//         throw NoriException("Invalid bitmap dimensions!");
-
-//     for (int y=0; y<m_size.y(); ++y)
-//         for (int x=0; x<m_size.x(); ++x)
-//             coeffRef(y, x) << bitmap.coeff(y, x), 1;
-// }
-
 
 ImageBlock::Mask ImageBlock::put(const Point2f &pos_, const Float *value, Mask active) {
  

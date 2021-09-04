@@ -22,6 +22,10 @@ void Renderer::renderSample(const Scene *scene, Sampler *sampler, ImageBlock &bl
 void Renderer::renderBlock(const Scene *scene, Sampler *sampler, ImageBlock &block) {
     #include <unistd.h>
     usleep(1000000);
+
+    /* Clear the block contents */
+    block.clear();
+
 }
 
 

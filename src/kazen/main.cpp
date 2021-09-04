@@ -12,10 +12,13 @@
 #include <kazen/bitmap.h>
 #include <kazen/renderer.h>
 #include <kazen/transform.h>
-
+#include <kazen/parser.h>
 // #include <array>
 // #include <tbb/blocked_range.h>
 // #include <tbb/parallel_for.h>
+#include <filesystem>
+
+
 
 using namespace kazen;
 
@@ -26,7 +29,13 @@ int main()
     
     // main test 
 
-    std::cout << util::copyright() << '\n';
+    // // ---------------- parser ----------------
+    std::filesystem::path xmlPath("../tests/test.xml");
+    if (std::filesystem::exists(xmlPath)) {
+        loadFromXML(std::string(xmlPath));
+    }
+
+    // std::cout << util::copyright() << '\n';
 
     // // ---------------- camera ----------------
     // std::cout << ScalarTransform4f() << '\n';

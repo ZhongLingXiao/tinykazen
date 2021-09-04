@@ -9,6 +9,7 @@ find_package(TBB REQUIRED)
 find_package(OpenImageIO REQUIRED)
 # find_package(embree 3.13.0 REQUIRED) # Here should point a spesific version
 find_package(fmt 7.1.3 REQUIRED)
+find_package(pugixml 1.11 REQUIRED)
 
 
 # Set platform-specific flags
@@ -62,6 +63,7 @@ add_executable(kazen
     include/kazen/dpdf.h
     include/kazen/frame.h
     include/kazen/object.h
+    include/kazen/parser.h
     include/kazen/proplist.h
     include/kazen/progress.h
     include/kazen/ray.h
@@ -77,6 +79,7 @@ add_executable(kazen
     src/kazen/block.cpp
     src/kazen/common.cpp
     src/kazen/object.cpp
+    src/kazen/parser.cpp
     src/kazen/progress.cpp
     src/kazen/proplist.cpp
     src/kazen/renderer.cpp
@@ -94,6 +97,7 @@ target_link_libraries(kazen PUBLIC
     OpenImageIO::OpenImageIO
     # embree
     fmt::fmt
+    pugixml::pugixml
 )
 
 # header only ext
@@ -105,7 +109,7 @@ target_include_directories(kazen PUBLIC
     $ENV{REZ_ENOKI_ROOT}/include
 
     # ## tbb ##
-    $ENV{REZ_TBB_ROOT}/include    
+    $ENV{REZ_TBB_ROOT}/include
 )
 
 

@@ -1,9 +1,3 @@
-/*
-    This file is part of Nori, a simple educational ray tracer
-
-    Copyright (c) 2015 by Wenzel Jakob
-*/
-
 #include <kazen/sampler.h>
 #include <kazen/block.h>
 #include <enoki/random.h>
