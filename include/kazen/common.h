@@ -141,6 +141,7 @@ template <typename Float_> struct TypeAliases {
 
 
 /// kazen renderer types
+class Accel;
 class BSDF;
 class Bitmap;
 class BlockGenerator;
