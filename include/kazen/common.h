@@ -149,8 +149,8 @@ class Camera;
 class ImageBlock;
 class Integrator;
 class KDTree;
-class Emitter;
-struct EmitterQueryRecord;
+class Light;
+struct LightQueryRecord;
 class Mesh;
 class Object;
 class ObjectFactory;
@@ -158,6 +158,22 @@ class PhaseFunction;
 class ReconstructionFilter;
 class Sampler;
 class Scene;
+
+template <typename Float_> struct RenderAliases {
+    using Float     = Float_;
+    
+    using ObjectPtr = replace_scalar_t<Float, const Object *>;
+    using BSDFPtr   = replace_scalar_t<Float, const BSDF *>;
+    using MeshPtr   = replace_scalar_t<Float, const Mesh *>;
+    using LightPtr  = replace_scalar_t<Float, const Light *>;
+};
+
+#define KAZEN_RENDER_TYPES()                                        \
+    using RenderAliases = kazen::RenderAliases<Float>;              \
+    using ObjectPtr     = typename RenderAliases::ObjectPtr;        \
+    using BSDFPtr       = typename RenderAliases::BSDFPtr;          \
+    using MeshPtr       = typename RenderAliases::MeshPtr;          \
+    using LightPtr      = typename RenderAliases::LightPtr;    
 
 /// Simple exception class, which stores a human-readable error description
 class Exception : public std::runtime_error {
